@@ -1,9 +1,6 @@
-package bim444.bootcamper.language;
+package bim444.bootcamper.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,15 +11,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Language {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-
     private String name;
+    @Column(unique = true,nullable = false)
+    private String email;
+    //todo passwordu encrypt et
+    private String password;
 
-    public Language(String name) {
-        this.name = name;
-    }
 }

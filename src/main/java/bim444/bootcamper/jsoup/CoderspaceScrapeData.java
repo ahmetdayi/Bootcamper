@@ -1,6 +1,6 @@
 package bim444.bootcamper.jsoup;
 
-import bim444.bootcamper.coderspace.CoderspaceStatus;
+import bim444.bootcamper.basebootcamp.coderspace.CoderspaceStatus;
 import bim444.bootcamper.common.ConstantUrl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +42,7 @@ public class CoderspaceScrapeData {
 
             CoderspaceInfoResponse coderspaceInfoResponse = CoderspaceInfoResponse
                     .builder()
-                    .id(UUID.randomUUID())
+                    .id(UUID.randomUUID().toString())
                     .name(names.get(i).text())
                     .link(ConstantUrl.CODERSPACE_BASE_URL + links.get(i).attr("href"))
                     .description(descriptions.get(i).text())

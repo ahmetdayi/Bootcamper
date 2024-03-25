@@ -1,9 +1,9 @@
-package bim444.bootcamper.jsoup;
+package bim444.bootcamper.basebootcamp.coderspace;
 
 import lombok.Builder;
 
 @Builder
-public record CoderspaceInfoResponse(
+public record CoderspaceResponse(
         String id,
         String name,
         String imgUrl,
@@ -13,6 +13,5 @@ public record CoderspaceInfoResponse(
         String status,
         String eventType,
         Boolean isDead
-
 ) {
 }

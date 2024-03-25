@@ -1,8 +1,9 @@
 package bim444.bootcamper;
 
-import bim444.bootcamper.coderspace.CoderspaceService;
-import bim444.bootcamper.patika.PatikaService;
-import bim444.bootcamper.techcareer.TechcareerService;
+import bim444.bootcamper.basebootcamp.coderspace.CoderspaceService;
+import bim444.bootcamper.basebootcamp.patika.PatikaService;
+import bim444.bootcamper.basebootcamp.techcareer.TechcareerService;
+import bim444.bootcamper.userbootcamp.UserBootcampRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,11 +14,13 @@ public class BootcamperApplication implements CommandLineRunner {
 	private final PatikaService patikaService;
 	private final CoderspaceService coderspaceService;
 	private final TechcareerService techcareerService;
+	private final UserBootcampRepository userBootcampRepository;
 
-    public BootcamperApplication(PatikaService patikaService, CoderspaceService coderspaceService, TechcareerService techcareerService) {
+    public BootcamperApplication(PatikaService patikaService, CoderspaceService coderspaceService, TechcareerService techcareerService, UserBootcampRepository userBootcampRepository) {
         this.patikaService = patikaService;
         this.coderspaceService = coderspaceService;
         this.techcareerService = techcareerService;
+        this.userBootcampRepository = userBootcampRepository;
     }
 
     public static void main(String[] args) {
@@ -43,5 +46,16 @@ public class BootcamperApplication implements CommandLineRunner {
 //		techcareerService.getDatabaseScrapeBootcamp().forEach(System.out::println);
 //		System.out.println("aaaaaaaaaaaaaaaaaa");
 //		techcareerService.getScrapeBootcamp().forEach(System.out::println);
+//		System.out.println("aaaaaaaaaaaaaaaaaa");
+//		userBootcampRepository.findByUserId("2463B147D92D491FA941BA3ABEC60D7a").stream()
+//				.map(UserBootcamp::getBaseBootcamp)
+//				.filter(baseBootcamp -> baseBootcamp instanceof Patika)
+//				.map(baseBootcamp -> (Patika) baseBootcamp)
+//				.toList().forEach(System.out::println);
+//		System.out.println("aaaaaaaaaaaaaaaaaa");
+//		userBootcampRepository.findPatikasByUserId("2463B147D92D491FA941BA3ABEC60D7a").forEach(System.out::println);
+//		System.out.println("aaaaaaaaaaaaaaaaaa");
+//		userBootcampRepository.findAll().forEach(System.out::println);
+
 	}
 }

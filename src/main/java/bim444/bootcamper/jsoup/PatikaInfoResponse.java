@@ -2,11 +2,9 @@ package bim444.bootcamper.jsoup;
 
 import lombok.Builder;
 
-import java.util.UUID;
-
 @Builder
 public record PatikaInfoResponse(
-        UUID id,
+        String id,
         String programName,
         String startDate,
         String endDate,

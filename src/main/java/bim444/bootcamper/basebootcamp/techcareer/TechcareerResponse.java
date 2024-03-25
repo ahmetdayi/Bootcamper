@@ -1,9 +1,9 @@
-package bim444.bootcamper.jsoup;
+package bim444.bootcamper.basebootcamp.techcareer;
 
 import lombok.Builder;
 
 @Builder
-public record TechcareerInfoResponse(
+public record TechcareerResponse(
         String id,
         String name,
         String imgUrl,

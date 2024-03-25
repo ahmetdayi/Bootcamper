@@ -38,7 +38,7 @@ public class TechcareerScrapeData {
             String imageUrl = imgSrc.split(",")[0].trim().split(" ")[0];
             TechcareerInfoResponse techcareerInfoResponse = TechcareerInfoResponse
                     .builder()
-                    .id(UUID.randomUUID())
+                    .id(UUID.randomUUID().toString())
                     .name(names.get(i).text())
                     .link(ConstantUrl.TECHCAREER_BOOTCAMPS_URL + links1.get(i).attr("href"))
                     .deadline(deadlines.get(i).text())
