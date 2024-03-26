@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -45,5 +47,9 @@ public class UserService {
                 .orElseThrow(() -> new NotExistException(ConstantError.NOT_EXIST));
         log.info("User id ile getirildi.");
         return user;
+    }
+
+    public List<User> findAll(){
+        return userRepository.findAll();
     }
 }

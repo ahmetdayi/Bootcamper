@@ -10,4 +10,5 @@ public interface PatikaRepository extends JpaRepository<Patika, UUID> {
     Optional<Patika> findByName(String name);
     Patika findByNameAndIsDeadFalse(String name);
     List<Patika> findByIsDead(Boolean isDead);
+
 }

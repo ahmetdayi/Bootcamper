@@ -19,7 +19,10 @@ public class User {
     private String name;
     @Column(unique = true,nullable = false)
     private String email;
-    //todo passwordu encrypt et
+
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 }

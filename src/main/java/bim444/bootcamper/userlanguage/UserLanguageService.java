@@ -47,4 +47,8 @@ public class UserLanguageService {
         return convert;
 
     }
+
+    public List<UserLanguage> findByLanguage(Language language){
+        return userLanguageRepository.findByLanguage(language);
+    }
 }

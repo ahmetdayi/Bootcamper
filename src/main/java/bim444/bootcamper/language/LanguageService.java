@@ -29,7 +29,7 @@ public class LanguageService {
         return convert;
     }
 
-    private Language findByName(String name){
+    public Language findByName(String name){
         Language language = languageRepository.findByName(name).orElse(null);
         log.info("Language name ile getirildi.");
         return language;

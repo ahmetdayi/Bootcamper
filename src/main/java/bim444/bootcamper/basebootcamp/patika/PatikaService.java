@@ -1,8 +1,12 @@
 package bim444.bootcamper.basebootcamp.patika;
 
+import bim444.bootcamper.basebootcamp.BaseBootcamp;
 import bim444.bootcamper.jsoup.PatikaInfoResponse;
 import bim444.bootcamper.jsoup.PatikaScrapeData;
 import bim444.bootcamper.language.LanguageService;
+import bim444.bootcamper.mail.MailService;
+import bim444.bootcamper.mail.SendMailRequest;
+import bim444.bootcamper.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,6 +23,9 @@ public class PatikaService {
     private final PatikaConverter patikaConverter;
     private final PatikaRepository patikaRepository;
     private final LanguageService languageService;
+    private final MailService mailService;
+    private final UserService userService;
+
 
     public List<PatikaResponse> getDatabaseBootcamp(){
         List<PatikaInfoResponse> patikaInfoResponseList = patikaScrapeData.scrapeLiveBootcamp();
@@ -55,15 +62,23 @@ public class PatikaService {
     }
 
 
-    private List<Patika> convertPatikaAndSave(List<PatikaInfoResponse> patikaInfoResponseList,Boolean isDead) {
+    private List<Patika> convertPatikaAndSave(List<PatikaInfoResponse> patikaInfoResponseList, Boolean isDead) {
         List<Patika> newList = new ArrayList<>();
-
+        List<Patika> newBootcampList = new ArrayList<>();
         List<Patika> patikaList = patikaConverter.convertResponse(patikaInfoResponseList);
         log.info("patika objesine cevrildi");
 
-        languageService.saveAll(patikaList.stream().map(Patika::getLanguage).toList());
+        List<Patika> filteredLanguagePatika = patikaList.stream()
+                .filter(patika -> languageService.findByName(patika.getLanguage().getName()) == null).toList();
+        languageService.saveAll(filteredLanguagePatika.stream().map(Patika::getLanguage).toList());
         log.info("languageler kaydedildi");
 
+        patikaList
+                .forEach(patika -> {
+                    if (languageService.findByName(patika.getLanguage().getName()) != null){
+                        patika.setLanguage(languageService.findByName(patika.getLanguage().getName()));
+                    }
+                });
         List<Patika> list = patikaList.stream().filter(patika -> findByName(patika.getName()) == null).toList();
         log.info("ayni veriler es gecildi");
 
@@ -72,7 +87,7 @@ public class PatikaService {
 
         List<Patika> list1 = patikaList.stream().filter(patika -> findByName(patika.getName()) != null).toList();
         List<Patika> getDatabaseConflictBootcamp = list1.stream().map(patika -> findByName(patika.getName())).toList();
-        List<Patika> newBootcampList = patikaRepository.saveAll(list);
+
         //eger bu methoda eski bootcampleri cagirirken girdiyse database dekilerle cakisan verileri al ve hepsinin isDeadini ture yap
         //bu sekilde eger cakisan verilerden birisi canli veriyse yani suanki bootcampin suresi bitmisse onu gecmis bootcam olarak isaretle
         if (isDead){
@@ -81,6 +96,17 @@ public class PatikaService {
         }
         log.info("ayni isme sahip olan veriler databaseden getirildi");
 
+        if (!list.isEmpty() ){
+             newBootcampList = patikaRepository.saveAll(list);
+            List<Patika> finalNewBootcampList = newBootcampList;
+            if ( !isDead){
+                userService.findAll().forEach(user -> {
+                    mailService.sendMail(new SendMailRequest(user.getEmail(),getPatikasUrl(finalNewBootcampList).toString(),"New Bootcamp"));
+                });
+            }
+
+        }
+
         newList.addAll(newBootcampList);
         newList.addAll(getDatabaseConflictBootcamp);
         return newList;
@@ -88,5 +114,10 @@ public class PatikaService {
 
     private Patika findByName(String name){
         return patikaRepository.findByName(name).orElse(null);
+    }
+
+    private List<String> getPatikasUrl(List<Patika> patikaList){
+       return patikaList.stream()
+                .map(BaseBootcamp::getLink).toList();
     }
 }
