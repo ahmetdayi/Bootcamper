@@ -1,7 +1,6 @@
 package bim444.bootcamper.jsoup;
 
 import bim444.bootcamper.basebootcamp.coderspace.CoderspaceStatus;
-import bim444.bootcamper.common.ConstantUrl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Document;

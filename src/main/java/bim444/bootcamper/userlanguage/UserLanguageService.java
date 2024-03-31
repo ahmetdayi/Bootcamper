@@ -22,8 +22,8 @@ public class UserLanguageService {
     private final UserService userService;
 
     private final LanguageService languageService;
-//todo uerresponse de passwordu kaldir
-    //aktif olmayan bootcamplere aktilamasin user
+
+
 
 
     public void create(CreateUserLanguageRequest request) {

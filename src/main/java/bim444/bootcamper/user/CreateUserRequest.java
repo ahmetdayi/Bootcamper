@@ -1,9 +1,12 @@
 package bim444.bootcamper.user;
 
+import bim444.bootcamper.validator.PasswordConstraint;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 public record CreateUserRequest(
-        String name,
-        //todo validation islemlerini unutma
-        String email,
-        String password
+       @NotBlank String name,
+       @NotBlank  @Email(regexp = ".+@.+\\..+",message = "invalid e-mail") String email,
+       @PasswordConstraint  @NotBlank String password
 ) {
 }

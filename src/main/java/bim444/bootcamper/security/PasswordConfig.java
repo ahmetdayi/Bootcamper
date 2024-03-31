@@ -1,4 +1,4 @@
-package bim444.bootcamper.common;
+package bim444.bootcamper.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

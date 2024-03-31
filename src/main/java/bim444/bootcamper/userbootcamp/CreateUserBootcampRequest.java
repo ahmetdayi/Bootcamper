@@ -1,7 +1,9 @@
 package bim444.bootcamper.userbootcamp;
 
+import jakarta.validation.constraints.NotBlank;
+
 public record CreateUserBootcampRequest(
-        String userId,
-        String baseBootcampId
+       @NotBlank String userId,
+       @NotBlank String baseBootcampId
 ) {
 }
