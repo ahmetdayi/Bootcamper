@@ -42,7 +42,7 @@ public class TechcareerScrapeData {
                     .link(ConstantUrl.TECHCAREER_BOOTCAMPS_URL + links1.get(i).attr("href"))
                     .deadline(deadlines.get(i).text())
                     .eventType(eventTypes.get(i).text())
-                    .imgUrl(ConstantUrl.TECHCAREER_BOOTCAMPS_URL + imageUrl)
+                    .imgUrl("https://www.techcareer.net" + imageUrl)
                     .build();
             log.info("TechcareerInfoResponse olusturuldu.");
             techcareerInfoResponseList.add(techcareerInfoResponse);
