@@ -74,6 +74,8 @@ public class TechcareerService {
     }
 
     private Techcareer findByName(String name){
-        return techcareerRepository.findByName(name).orElse(null);
+        return techcareerRepository.findByName(name).stream().findFirst().orElse(null);
+
     }
+
 }
