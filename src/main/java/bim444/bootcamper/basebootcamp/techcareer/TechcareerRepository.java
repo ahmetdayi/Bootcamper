@@ -9,5 +9,5 @@ import java.util.UUID;
 
 public interface TechcareerRepository extends JpaRepository<Techcareer, UUID> {
     @Transactional
-    List<Techcareer> findByName(String name);
+    Optional<Techcareer> findByName(String name);
 }

@@ -37,6 +37,7 @@ public class TechcareerService {
     }
 
     private List<Techcareer> convertAndSaveBootcamp() {
+
         List<Techcareer> newList = new ArrayList<>();
         List<Techcareer> newBootcampList = new ArrayList<>();
         List<TechcareerInfoResponse> techcareerInfoResponseList = techcareerScrapeData.scrapeBootcamp();
@@ -57,7 +58,6 @@ public class TechcareerService {
         //databasede olamayan datalari kaydedip aldik ve yeni listeye ekleyip donduk
         //bu sayede gelen tum datalar database e kaydedildi ve idli bir sekilde dondu
         if (!filterdTechcareerList.isEmpty()){
-            newBootcampList = techcareerRepository.saveAll(filterdTechcareerList);
             List<Techcareer> finalNewBootcampList = newBootcampList;
             userService.findAll().forEach(user -> {
                 mailService.sendMail(new SendMailRequest(user.getEmail(),getTechcareerUrl(finalNewBootcampList).toString(),"New Bootcamp"));
@@ -74,7 +74,7 @@ public class TechcareerService {
     }
 
     private Techcareer findByName(String name){
-        return techcareerRepository.findByName(name).stream().findFirst().orElse(null);
+        return techcareerRepository.findByName(name).orElse(null);
 
     }
 
