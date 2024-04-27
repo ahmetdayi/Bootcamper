@@ -31,9 +31,8 @@ public class AuthenticationService {
     private final SecurityUserService securityUserService;
     private final TokenRepository tokenRepository;
     private final JwtService jwtService;
-    private  AuthenticationManager authenticationManager;
     private final UserConverter userConverter;
-
+    private final AuthenticationManager authenticationManager;
 
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
