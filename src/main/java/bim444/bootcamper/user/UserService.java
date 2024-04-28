@@ -26,6 +26,7 @@ public class UserService {
                 .email(request.email())
                 .name(request.name())
                 .password(encoder.encode(request.password()))
+                .role(Role.USER)
                 .build();
         userRepository.save(user);
         log.info("user kaydedildi");
