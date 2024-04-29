@@ -35,13 +35,6 @@ public class SecurityConfig {
     private final PasswordEncoder passwordEncoder;
     private final LogoutHandler logoutHandler;
 
-    public SecurityConfig(JwtFilter jwtFilter, SecurityUserService securityUserService, PasswordEncoder passwordEncoder, LogoutHandler logoutHandler) {
-        this.jwtFilter = jwtFilter;
-        this.securityUserService = securityUserService;
-        this.passwordEncoder = passwordEncoder;
-        this.logoutHandler = logoutHandler;
-    }
-
     private static final String[] WHITE_LIST_URL = {
             "/v2/api-docs",
             "/v3/api-docs",
@@ -61,7 +54,7 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable).cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(getCorsConfiguration()))
                 .authorizeHttpRequests(x -> {
-                            x.requestMatchers("/user/findById/**").hasAuthority("USER");
+                            x.requestMatchers("/user/findById/**").hasRole("USER");
                             x.requestMatchers(WHITE_LIST_URL).permitAll();
                         }
 
