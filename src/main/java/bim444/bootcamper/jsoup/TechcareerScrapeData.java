@@ -6,9 +6,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Component
 @RequiredArgsConstructor
@@ -42,11 +40,17 @@ public class TechcareerScrapeData {
                     .link(ConstantUrl.TECHCAREER_BOOTCAMPS_URL + links1.get(i).attr("href"))
                     .deadline(deadlines.get(i).text())
                     .eventType(eventTypes.get(i).text())
-                    .imgUrl(ConstantUrl.TECHCAREER_BOOTCAMPS_URL + imageUrl)
+                    .imgUrl("https://www.techcareer.net" + imageUrl)
                     .build();
             log.info("TechcareerInfoResponse olusturuldu.");
-            techcareerInfoResponseList.add(techcareerInfoResponse);
+
+                techcareerInfoResponseList.add(techcareerInfoResponse);
+
         }
+        Set<TechcareerInfoResponse> uniqueSet = new HashSet<>(techcareerInfoResponseList);
+        techcareerInfoResponseList.clear();
+        techcareerInfoResponseList.addAll(uniqueSet);
+        System.out.println(uniqueSet.size());
         return techcareerInfoResponseList;
     }
 
