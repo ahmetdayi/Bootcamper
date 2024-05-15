@@ -57,6 +57,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable).cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(getCorsConfiguration()))
                 .authorizeHttpRequests(x -> {
                             x.requestMatchers("/user/findById/**").hasRole("USER");
+                            x.requestMatchers("userbootcamp/**").hasRole("USER");
                             x.requestMatchers(WHITE_LIST_URL).permitAll();
                         }
 
