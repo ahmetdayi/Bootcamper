@@ -1,13 +1,12 @@
 package bim444.bootcamper.basebootcamp.techcareer;
 
-import jakarta.transaction.Transactional;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import jakarta.transaction.Transactional;
 
-public interface TechcareerRepository extends JpaRepository<Techcareer, UUID> {
+public interface TechcareerRepository extends JpaRepository<Techcareer, String> {
     @Transactional
     Optional<Techcareer> findByName(String name);
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
+
 public class BaseBootcampService {
 
     private final BaseBootcampRepository baseBootcampRepository;
