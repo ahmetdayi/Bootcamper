@@ -21,8 +21,5 @@ public class Patika extends BaseBootcamp {
     private String startDate;
     private String endDate;
 
-    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
-    @JoinColumn
-    private Language language;
 
 }

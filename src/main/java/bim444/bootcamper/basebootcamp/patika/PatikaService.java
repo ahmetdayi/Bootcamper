@@ -68,17 +68,6 @@ public class PatikaService {
         List<Patika> patikaList = patikaConverter.convertResponse(patikaInfoResponseList);
         log.info("patika objesine cevrildi");
 
-        List<Patika> filteredLanguagePatika = patikaList.stream()
-                .filter(patika -> languageService.findByName(patika.getLanguage().getName()) == null).toList();
-        languageService.saveAll(filteredLanguagePatika.stream().map(Patika::getLanguage).toList());
-        log.info("languageler kaydedildi");
-
-        patikaList
-                .forEach(patika -> {
-                    if (languageService.findByName(patika.getLanguage().getName()) != null){
-                        patika.setLanguage(languageService.findByName(patika.getLanguage().getName()));
-                    }
-                });
         List<Patika> list = patikaList.stream().filter(patika -> findByName(patika.getName()) == null).toList();
         log.info("ayni veriler es gecildi");
 

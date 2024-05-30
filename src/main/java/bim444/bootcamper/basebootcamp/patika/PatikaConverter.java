@@ -31,7 +31,6 @@ public class PatikaConverter {
                                 .endDate(from.endDate())
                                 .imgUrl(from.img())
                                 .deadline(from.deadline())
-                                .language(new Language(from.programLanguage()))
                                 .link(from.link())
                                 .isDead(from.isDead())
                                 .build()
@@ -52,7 +51,7 @@ public class PatikaConverter {
                                 .endDate(from.getEndDate())
                                 .imgUrl(from.getImgUrl())
                                 .deadline(from.getDeadline())
-                                .language(languageConverter.convert(from.getLanguage()))
+
                                 .link(from.getLink())
                                 .isDead(from.getIsDead())
                                 .build()
@@ -71,7 +70,7 @@ public class PatikaConverter {
                         .endDate(from.getEndDate())
                         .imgUrl(from.getImgUrl())
                         .deadline(from.getDeadline())
-                        .language(languageConverter.convert(from.getLanguage()))
+
                         .link(from.getLink())
                         .isDead(from.getIsDead())
                         .build();
