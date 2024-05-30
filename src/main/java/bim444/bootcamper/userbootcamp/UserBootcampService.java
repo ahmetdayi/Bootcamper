@@ -11,6 +11,7 @@ import bim444.bootcamper.basebootcamp.patika.PatikaResponse;
 import bim444.bootcamper.basebootcamp.techcareer.Techcareer;
 import bim444.bootcamper.basebootcamp.techcareer.TechcareerConverter;
 import bim444.bootcamper.basebootcamp.techcareer.TechcareerResponse;
+import bim444.bootcamper.exception.AlreadyExistException;
 import bim444.bootcamper.user.User;
 import bim444.bootcamper.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,11 @@ public class UserBootcampService {
     private final CoderspaceConverter coderspaceConverter;
 
     public void create(CreateUserBootcampRequest request){
+        if (userBootcampRepository.findByUser_IdAndBaseBootcamp_Id(request.userId(), request.baseBootcampId())!=null){
+            throw new AlreadyExistException("User bootcamp already exists");
+
+        }
+
         User user = userService.findById(request.userId());
         BaseBootcamp baseBootcamp = baseBootcampService.findById(request.baseBootcampId());
         UserBootcamp userBootcamp = UserBootcamp.builder()

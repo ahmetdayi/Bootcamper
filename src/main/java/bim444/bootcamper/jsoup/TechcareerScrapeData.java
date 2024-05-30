@@ -29,7 +29,6 @@ public class TechcareerScrapeData {
         Elements eventTypes = bootcampDetailCardsDiv.select("p.MuiTypography-root.MuiTypography-body2.css-856g1e");
 
         Elements imgUrls = bootcampDetailCardsDiv.select("img[data-test=single-event-image]");
-
         for (int i = 0; i < imgUrls.size(); i++) {
             String imgSrc = imgUrls.get(i).attr("src");
             String imageUrl = imgSrc.split(",")[0].trim().split(" ")[0];

@@ -26,4 +26,5 @@ public interface UserBootcampRepository extends JpaRepository<UserBootcamp, Stri
 
 
     List<UserBootcamp> findByUser_Id(String userId);
+    UserBootcamp findByUser_IdAndBaseBootcamp_Id(String userId, String baseBootcampId);
 }
